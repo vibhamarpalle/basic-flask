@@ -44,6 +44,7 @@ def reset_seats():
 
 def seating():
     st.title("Seat Selection")
+    user_name = st.text_input("Enter your name:", "")
     st.write("Select a seat from the available options below.")
 
     # Fetch current seat status
@@ -54,10 +55,10 @@ def seating():
     for i, seat in enumerate(seats):
         with cols[i % 10]:
             if seat:
-                st.button(f"Seat {i} 🚫", key=f"seat_{i}", disabled=True)
+                st.button(f"Seat {i} 🚫", key=f"seat_{i+1}", disabled=True)
             else:
-                if st.button(f"Seat {i} ✅", key=f"seat_{i}"):
-                    updated_seats = select_seat(i,"employee")
+                if st.button(f"Seat {i} ✅", key=f"seat_{i+1}"):
+                    updated_seats = select_seat(i+1,user_name)
                     if updated_seats:
                         seats = updated_seats  # Update the local seat list
 def see_billing():
